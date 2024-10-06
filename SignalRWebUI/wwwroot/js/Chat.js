@@ -15,13 +15,13 @@ connection.on("ReceiveMessage", function (user, message) {
     document.getElementById("messagelist").appendChild(li);
 });
 
-connection.star().then(function () {
+connection.start().then(function () {
     document.getElementById("sendbutton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
-document.getElementById("sendbutton").addEventListener("click", function (event) {
+document.getElementById("sendbutton").addEventListener("click", function(event) {
     var user = document.getElementById("userinput").value;
     var message = document.getElementById("messageinput").value;
 
