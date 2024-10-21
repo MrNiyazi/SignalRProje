@@ -12,8 +12,8 @@ using SignalR.DataAccessLayer.Concrete;
 namespace SignalR.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    [Migration("20241021171001_mig_add_identity")]
-    partial class mig_add_identity
+    [Migration("20241021202928_mig_add_identityv2")]
+    partial class mig_add_identityv2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
