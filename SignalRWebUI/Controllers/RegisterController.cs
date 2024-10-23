@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.EntityLayer.Entities;
 using SignalRWebUI.Dtos.IdentityDto;
@@ -13,7 +13,6 @@ namespace SignalRWebUI.Controllers
         {
             _userManager = userManager;
         }
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -26,8 +25,8 @@ namespace SignalRWebUI.Controllers
             {
                 Name = registerDto.Name,
                 Surname = registerDto.Surname,
-                UserName = registerDto.Username,
                 Email = registerDto.Mail,
+                UserName = registerDto.Username,
             };
             var result = await _userManager.CreateAsync(appUser, registerDto.Password);
             if (result.Succeeded)

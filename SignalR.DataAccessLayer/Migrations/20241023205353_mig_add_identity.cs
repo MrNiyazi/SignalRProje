@@ -4,24 +4,24 @@
 
 namespace SignalR.DataAccessLayer.Migrations
 {
-    public partial class mig_add_idenityv4 : Migration
+    public partial class mig_add_identity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+              name: "AspNetRoles",
+              columns: table => new
+              {
+                  Id = table.Column<int>(type: "int", nullable: false)
+                      .Annotation("SqlServer:Identity", "1, 1"),
+                  Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                  NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                  ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+              },
+              constraints: table =>
+              {
+                  table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+              });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -195,7 +195,8 @@ namespace SignalR.DataAccessLayer.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-        }
+        
+    }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -219,6 +220,7 @@ namespace SignalR.DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
         }
     }
 }
