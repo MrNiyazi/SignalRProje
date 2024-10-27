@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+	
 }
 <div class="content">
 	<div class="container-fluid">
@@ -31,8 +32,9 @@
 							<tbody>
 								@foreach (var item in Model)
 								{
+									
 									<tr>
-										<td>@item.ProductID</td>
+										<th>@item.ProductID</th>
 										<td>@item.ProductName</td>
 										<td>@item.Price</td>
 										<td>@item.CategoryName</td>
