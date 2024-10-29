@@ -121,7 +121,7 @@ namespace SignalRApi.Controllers
 				Price = updateProductDto.Price,
 				ImageUrl = updateProductDto.ImageUrl,
 				ProductStatus = updateProductDto.ProductStatus,
-				CategoryID = updateProductDto.CategoryID,
+				CategoryID = updateProductDto.CategoryID
 			});
 			return Ok("Kategori Güncellendi");
 		}
