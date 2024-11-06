@@ -77,7 +77,6 @@ namespace SignalRApi.Controllers
 			return Ok("Değiştirildi");
 		}
 
-
 	//	void BookingStatusApproved(int id);
 	//	void BookingStatusCancelled(int id);
 	}
