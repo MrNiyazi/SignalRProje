@@ -16,7 +16,7 @@ namespace SignalRWebUI.ViewComponents.DefaultSliderComponentPartial
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessagge = await client.GetAsync("https://localhost:7267/api/Sliders");
+            var responseMessagge = await client.GetAsync("https://localhost:7267/api/Slider");
             var jsonData = await responseMessagge.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultSliderDto>>(jsonData);
             return View(values);
