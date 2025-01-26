@@ -34,11 +34,7 @@ namespace SignalRWebUI.Controllers
             {
 				return RedirectToAction("Index");
 			}
-
-
-            return View();
-
-            
+            return View();          
         }
     }
 }
