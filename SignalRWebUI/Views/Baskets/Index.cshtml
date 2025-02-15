@@ -5,6 +5,7 @@
     decimal basketTotalPrice = 0;
     decimal basketTotalPriceWithTax = 0;
     decimal Tax = 0;
+    decimal productTotalPrice = 0;
 }
 
 <!DOCTYPE html>
@@ -42,20 +43,25 @@
                             <th>Sil</th>
                         </tr>
                     </thead>
-                    
-                    @foreach(var item in Model)
+
+                    @foreach(var group in Model.GroupBy(x => x.ProductName))
                     {
+                        var item = group.First();
+                        var itemCount = group.Count();
+
                         basketTotalPrice = Model.Sum(x => x.Price);
                         Tax = basketTotalPrice * 10 / 100;
                         basketTotalPriceWithTax = basketTotalPrice + Tax;
                         count++;
+                        productTotalPrice = (@itemCount * @item.Price);
+
                         <tbody class="aling-middle">
                             <tr>
                                 <td class="aling-middle">@count</td>
                                 <td class="aling-middle">@item.ProductName</td>
-                                <td class="aling-middle">@item.Count</td>
+                                <td class="aling-middle">@itemCount</td>
                                 <td class="aling-middle">@item.Price</td>
-                                <td class="aling-middle">@item.TotalPrice</td>
+                                <td class="aling-middle">@productTotalPrice</td>
                                 <td class="aling-middle btn-delete"><a  class="btn btn-sm btn-danger" href="/Baskets/DeleteBasket/@item.BasketID"><i class="fa fa-times"></i></a></td>
                             </tr>
                         </tbody>
