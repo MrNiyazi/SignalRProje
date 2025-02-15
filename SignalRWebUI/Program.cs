@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using SignalR.DataAccessLayer.Concrete;
@@ -16,8 +17,10 @@ builder.Services.AddControllersWithViews(opt =>
 	opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
 
-
-
+builder.Services.ConfigureApplicationCookie(opts =>
+{
+	opts.LoginPath = "/Login/Index";
+});
 
 var app = builder.Build();
 
@@ -31,7 +34,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseAuthentication();
 app.UseRouting();
 
 app.UseAuthorization();
