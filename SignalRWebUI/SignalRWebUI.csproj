@@ -19,11 +19,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SignalR.DataAccessLayer\SignalR.DataAccessLayer.csproj" />
     <ProjectReference Include="..\SignalR.EntityLayer\SignalR.EntityLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="QRCoder">
+      <HintPath>C:\Users\berat\Downloads\QRCoder.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
