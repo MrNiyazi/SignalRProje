@@ -14,6 +14,7 @@ namespace SignalRWebUI.Controllers
 			return View();
 		}
 		[HttpPost]
+		
 		public IActionResult Index(CreateMailDto createMailDto)
 		{
 			MimeMessage mimeMessage = new MimeMessage();
