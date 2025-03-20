@@ -103,10 +103,10 @@ namespace SignalRApi.Hubs
 			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value8);
 
 			var value9 = 42;
-			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value9);
+			await Clients.All.SendAsync("ReceiveicValue1", value9);
 
 			var value10 = 38;
-			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value10);
+			await Clients.All.SendAsync("ReceiveicValue2", value10);
 
 
 		}
