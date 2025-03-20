@@ -99,6 +99,16 @@ namespace SignalRApi.Hubs
 			var value7 = _orderService.TTotalOrderCount();
 			await Clients.All.SendAsync("ReceiveTotalOrderCount", value7);
 
+			var value8 = _productService.TProductPriceByStekBurger();
+			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value8);
+
+			var value9 = 42;
+			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value9);
+
+			var value10 = 38;
+			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value10);
+
+
 		}
 
 		public async Task GetBookingList()

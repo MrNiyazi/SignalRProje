@@ -78,6 +78,11 @@ namespace SignalR.BusinessLayer.Concrete
 			return _productDal.ProductPriceByHamburger();
 		}
 
+		public decimal TProductPriceByStekBurger()
+		{
+			return _productDal.ProductPriceByStekBurger();
+		}
+
 		public void TUpdate(Product entity)
 		{
 			_productDal.Update(entity);
