@@ -102,11 +102,11 @@ namespace SignalRApi.Hubs
 			var value8 = _productService.TProductPriceByStekBurger();
 			await Clients.All.SendAsync("ReceiveProductPriceByStekBurger", value8);
 
-			var value9 = 42;
-			await Clients.All.SendAsync("ReceiveicValue1", value9);
+			var value9 = _productService.TTotalPriceByDrinkCategory();
+			await Clients.All.SendAsync("ReceiveTotalPriceByDrinkCategory", value9);
 
-			var value10 = 38;
-			await Clients.All.SendAsync("ReceiveicValue2", value10);
+			var value10 = _productService.TTotalPriceBySaladCategory();
+			await Clients.All.SendAsync("ReceiveTotalPriceBySaladCategory", value10);
 
 
 		}
