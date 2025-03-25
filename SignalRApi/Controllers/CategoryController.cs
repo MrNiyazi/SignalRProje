@@ -44,11 +44,9 @@ namespace SignalRApi.Controllers
 		[HttpPost]
 		public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
 		{
-			_categoryService.TAdd(new Category()
-			{
-				CategoryName = createCategoryDto.CategoryName,
-				Status = true
-			});
+			createCategoryDto.Status=true;
+			var value = _mapper.Map<Category>(createCategoryDto);
+			_categoryService.TAdd(value);
 			return Ok("Kategori Eklendi");
 		}
 		[HttpDelete("{id}")]
@@ -68,12 +66,8 @@ namespace SignalRApi.Controllers
 		[HttpPut]
 		public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
 		{
-			_categoryService.TUpdate(new Category()
-			{
-				CategoryID = updateCategoryDto.CategoryID,
-				CategoryName = updateCategoryDto.CategoryName,
-				Status = updateCategoryDto.Status,
-			});
+			var value = _mapper.Map<Category>(updateCategoryDto);
+			_categoryService.TUpdate(value);
 			return Ok("Kategori Güncellendi");
 		}
 
