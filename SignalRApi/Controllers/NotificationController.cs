@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.NotificationDto;
@@ -11,14 +12,17 @@ namespace SignalRApi.Controllers
 	public class NotificationController : ControllerBase
 	{
 		private readonly INotificationService _notificationService;
-		public NotificationController(INotificationService notificationService)
+		private readonly IMapper _mapper;
+		public NotificationController(INotificationService notificationService, IMapper mapper)
 		{
 			_notificationService = notificationService;
+			_mapper = mapper;
 		}
 		[HttpGet]
 		public IActionResult NotificationList()
 		{
-			return Ok(_notificationService.TGetListAll());
+			var values = _notificationService.TGetListAll();
+			return Ok(_mapper.Map<List<ResultNotificationDto>>(values));
 		}
 		[HttpGet("NotificatonCountByStatusFalse")]
 		public IActionResult NotificationCountByStatusFalse()
@@ -33,15 +37,10 @@ namespace SignalRApi.Controllers
 		[HttpPost]
 		public IActionResult CreateNotification(CreateNotificationDto createNotificationDto)
 		{
-			Notification notification = new Notification()
-			{
-				Description = createNotificationDto.Description,
-				Icon = createNotificationDto.Icon,
-				Status = false,
-				Type = createNotificationDto.Type,
-				Date = Convert.ToDateTime(DateTime.Now.ToShortTimeString())
-			};
-			_notificationService.TAdd(notification);
+			createNotificationDto.Status = false;
+			createNotificationDto.Date = Convert.ToDateTime(DateTime.Now.ToShortTimeString());
+			var value = _mapper.Map<Notification>(createNotificationDto);
+			_notificationService.TAdd(value);
 			return Ok("Ekleme işlemi yapıldı");
 		}
 		[HttpDelete("{id}")]
@@ -60,16 +59,10 @@ namespace SignalRApi.Controllers
 		[HttpPut]
 		public IActionResult UpdateNatification(UpdateNatificationDto updateNatificationDto)
 		{
-			Notification notification = new Notification()
-			{
-				NotificationID = updateNatificationDto.NotificationID,
-				Description = updateNatificationDto.Description,
-				Icon = updateNatificationDto.Icon,
-				Status = updateNatificationDto.Status,
-				Type = updateNatificationDto.Type,
-				Date = Convert.ToDateTime(DateTime.Now.ToShortDateString())
-			};
-			_notificationService.TUpdate(notification);
+			updateNatificationDto.Status = false;
+			updateNatificationDto.Date = Convert.ToDateTime(DateTime.Now.ToShortTimeString());
+			var value = _mapper.Map<Notification>(updateNatificationDto);
+			_notificationService.TUpdate(value);
 			return Ok("bildirim güncellendi");
 		}
 		[HttpGet("NotificationStatusChangeToFalse/{id}")]

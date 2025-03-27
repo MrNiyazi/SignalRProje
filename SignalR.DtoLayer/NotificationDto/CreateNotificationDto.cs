@@ -13,5 +13,6 @@ namespace SignalR.DtoLayer.NotificationDto
 		public string Description { get; set; }
 		
 		public bool Status { get; set; }
+		public DateTime Date {  get; set; }
 	}
 }
