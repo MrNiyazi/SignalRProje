@@ -101,3 +101,11 @@ app.MapControllers();
 app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();
+
+
+
+
+
+
+
+
