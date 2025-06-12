@@ -19,6 +19,7 @@ namespace SignalRWebUI.Controllers
             return View();
         }
 
+
         [HttpGet]
         public PartialViewResult SendMessage()
         {
