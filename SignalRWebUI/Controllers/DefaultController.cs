@@ -20,6 +20,7 @@ namespace SignalRWebUI.Controllers
         }
 
 
+
         [HttpGet]
         public PartialViewResult SendMessage()
         {
