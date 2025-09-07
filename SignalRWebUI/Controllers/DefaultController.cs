@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.DtoLayer.ContactDto;
 using SignalRWebUI.Dtos.MessageDtos;
 using System.Text;
 
@@ -16,15 +17,21 @@ namespace SignalRWebUI.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.v = "";
             return View();
         }
 
 
 
         [HttpGet]
-        public PartialViewResult SendMessage()
+        public async Task<PartialViewResult> SendMessage()
         {
-            return PartialView();
+			var client = _httpClientFactory.CreateClient();
+			var responseMessage = await client.GetAsync("https://localhost:7267/api/Contact");
+			var jsonData = await responseMessage.Content.ReadAsStringAsync();
+			var values = JsonConvert.DeserializeObject<ResultContactDto>(jsonData);
+            ViewBag.location = values.Location;
+			return PartialView();
         }
 
         [HttpPost]
