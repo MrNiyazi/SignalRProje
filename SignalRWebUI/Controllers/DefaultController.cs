@@ -15,9 +15,14 @@ namespace SignalRWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.v = "";
+			var client = _httpClientFactory.CreateClient();
+			var responseMessage = await client.GetAsync("https://localhost:7267/api/Contact");
+			var jsonData = await responseMessage.Content.ReadAsStringAsync();
+			var values = JsonConvert.DeserializeObject<ResultContactDto>(jsonData);
+			ViewBag.location = values.Location;
+			ViewBag.v = "";
             return View();
         }
 
@@ -26,11 +31,7 @@ namespace SignalRWebUI.Controllers
         [HttpGet]
         public async Task<PartialViewResult> SendMessage()
         {
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7267/api/Contact");
-			var jsonData = await responseMessage.Content.ReadAsStringAsync();
-			var values = JsonConvert.DeserializeObject<ResultContactDto>(jsonData);
-            ViewBag.location = values.Location;
+			
 			return PartialView();
         }
 
