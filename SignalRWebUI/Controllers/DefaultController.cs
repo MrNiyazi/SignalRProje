@@ -29,9 +29,8 @@ namespace SignalRWebUI.Controllers
 
 
         [HttpGet]
-        public async Task<PartialViewResult> SendMessage()
-        {
-			
+        public PartialViewResult SendMessage()
+        {	
 			return PartialView();
         }
 
