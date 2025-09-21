@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SignalR.DtoLayer.ContactDto;
 using SignalRWebUI.Dtos.MessageDtos;
 using System.Text;
@@ -17,12 +18,19 @@ namespace SignalRWebUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7267/api/Contact");
-			var jsonData = await responseMessage.Content.ReadAsStringAsync();
-			var values = JsonConvert.DeserializeObject<ResultContactDto>(jsonData);
-			ViewBag.location = values.Location;
-			ViewBag.v = "";
+			//var client = _httpClientFactory.CreateClient();
+			//var responseMessage = await client.GetAsync("https://localhost:7267/api/Contact");
+			//var jsonData = await responseMessage.Content.ReadAsStringAsync();
+			//var values = JsonConvert.DeserializeObject<ResultContactDto>(jsonData);
+			//ViewBag.location = values.Location;
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7267/api/Contact");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JObject item = JObject.Parse(responseBody);
+            string value = item["location"].ToString();
+            ViewBag.location = value;
             return View();
         }
 
