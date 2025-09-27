@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarComponentPartial")
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Default/Index/">Ana Sayfa</a>
+                    <a class="breadcrumb-item text-white" href="/Default/Index/">Menü</a>
+                    <a class="breadcrumb-item active">Sepetiniz</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <h1>Rapid Api Verileri</h1>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- footer section -->
+    @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
+    <!-- footer section -->
+    @await Component.InvokeAsync("_UILayoutScriptComponentPartial")
+
+
+
+</body>
+
+</html>
