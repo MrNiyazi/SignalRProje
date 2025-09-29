@@ -8,6 +8,7 @@ namespace SignalRWebUI.Controllers
 	{
 		public async Task<IActionResult> Index()
 		{
+			List<ResultTastyApi> resultTastyApis = new List<ResultTastyApi>();
 			var client = new HttpClient();
 			var request = new HttpRequestMessage
 			{
