@@ -8,7 +8,7 @@ namespace SignalRWebUI.Controllers
 	{
 		public async Task<IActionResult> Index()
 		{
-			List<ResultTastyApi> resultTastyApis = new List<ResultTastyApi>();
+			//List<ResultTastyApi> resultTastyApis = new List<ResultTastyApi>();
 			var client = new HttpClient();
 			var request = new HttpRequestMessage
 			{
@@ -24,9 +24,15 @@ namespace SignalRWebUI.Controllers
 			{
 				response.EnsureSuccessStatusCode();
 				var body = await response.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultTastyApi>>(body);
-				return View(values.ToList());
+				//var values = JsonConvert.DeserializeObject<List<ResultTastyApi>>(body);
+				//return View(values.ToList());
 				//Console.WriteLine(body);
+				var root = JsonConvert.DeserializeObject<RootTastyApi>(body);
+				var values = root.Results;
+				return View (values);
+
+
+
 			}
 			
 		}
