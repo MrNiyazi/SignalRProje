@@ -14,8 +14,4 @@
     <ProjectReference Include="..\SignalR.DataAccessLayer\SignalR.DataAccessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ValidationRules\NewFolder\" />
-  </ItemGroup>
-
 </Project>
