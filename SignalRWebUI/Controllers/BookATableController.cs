@@ -15,7 +15,7 @@ namespace SignalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 			HttpClient client = new HttpClient();
 			HttpResponseMessage response = await client.GetAsync("https://localhost:7267/api/Contact");
@@ -25,12 +25,19 @@ namespace SignalRWebUI.Controllers
 			string value = item[0]["location"].ToString();
 			ViewBag.location = value;
 			return View();
-			return View();
+			
         }
         [HttpPost]
         public async Task<IActionResult> Index(CreateBookingDtos createBookingDtos){
-            
-            var client = _httpClientFactory.CreateClient();
+			HttpClient client2 = new HttpClient();
+			HttpResponseMessage response = await client2.GetAsync("https://localhost:7267/api/Contact");
+			response.EnsureSuccessStatusCode();
+			string responseBody = await response.Content.ReadAsStringAsync();
+			JArray item = JArray.Parse(responseBody);
+			string value = item[0]["location"].ToString();
+			ViewBag.location = value;
+
+			var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingDtos);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("https://localhost:7267/api/Booking", stringContent);
