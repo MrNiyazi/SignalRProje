@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SignalRWebUI.Dtos.AboutDtos;
 using SignalRWebUI.Dtos.BookingDtos;
 using System.Text;
@@ -16,7 +17,15 @@ namespace SignalRWebUI.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+			HttpClient client = new HttpClient();
+			HttpResponseMessage response = await client.GetAsync("https://localhost:7267/api/Contact");
+			response.EnsureSuccessStatusCode();
+			string responseBody = await response.Content.ReadAsStringAsync();
+			JArray item = JArray.Parse(responseBody);
+			string value = item[0]["location"].ToString();
+			ViewBag.location = value;
+			return View();
+			return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(CreateBookingDtos createBookingDtos){
